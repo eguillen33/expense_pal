@@ -20,7 +20,7 @@ jobs:
       - checkout
       - run:
           name: "Expense Pal"
-          command: "Welcome to the Expense Pal Test!"
+          command: echo "Welcome to the Expense Pal Test!"
 
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/workflows/ & https://circleci.com/docs/configuration-reference/#workflows
