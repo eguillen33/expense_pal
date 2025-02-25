@@ -52,4 +52,8 @@ for label, entry in [("Date (YYYY-MM-DD):", 'date_entry'), ("Category:", 'catego
     
 tk.Button(app, text="Add Transaction", command=handle_add_transaction).pack()
 tk.Button(app, text="Generate Report", command=generate_report).pack()
-app.mainloop()
+
+# Run the script. This allows unit testing by wrapping the Tkinter main loop
+# This change allows testing of file import functions without triggering the GUI
+if __name__ == "__main__":
+    app.mainloop()
