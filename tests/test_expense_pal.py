@@ -7,6 +7,7 @@ class TestExpensePal(unittest.TestCase):
         expense_pal.df = expense_pal.df.iloc[0:0]
         
     def test_add_transaction(self):
+        print("########## Testing Add Transaction ##########")
         # Check that a transaction is correctly added
         initial_len = len(expense_pal.df)
         expense_pal.add_transaction("2025-01-01", "Groceries", -100)
