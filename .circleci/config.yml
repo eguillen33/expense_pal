@@ -10,6 +10,11 @@ jobs:
           name: "Expense Pal welcome note"
           command: echo "Welcome to the Expense Pal CI/CD pipeline!"
       - run:
+          name: "Install Python and Pip"
+          command: | 
+            sudo apt-get update
+            sudo apt-get install -y python3 python3-pip
+      - run:
           name: "Install dependencies"
           command: pip3 install -r requirements.txt
       - run:
