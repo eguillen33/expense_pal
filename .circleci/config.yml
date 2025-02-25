@@ -11,10 +11,10 @@ jobs:
           command: echo "Welcome to the Expense Pal CI/CD pipeline!"
       - run:
           name: "Install dependencies"
-          command: pip install -r requirements.txt
+          command: pip3 install -r requirements.txt
       - run:
           name: "Run unit tests"
-          command: python -m unittest discover -s tests
+          command: python3 -m unittest discover -s tests
 
 # Orchestrate jobs using workflows
 workflows:
