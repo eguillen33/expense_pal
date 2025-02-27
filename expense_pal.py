@@ -64,6 +64,5 @@ if __name__ == "__main__":
         entries[entry].pack()
     tk.Button(app, text="Add Transaction", command=handle_add_transaction).pack()
     tk.Button(app, text="Generate Report", command=generate_report).pack()
-    
+
     app.mainloop()
-    
