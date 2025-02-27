@@ -6,14 +6,16 @@ from tkinter import messagebox
 # Init DataFrame
 df = pandas.DataFrame(columns=['Date', 'Category', 'Amount'])
 
+
 # Add txn function
 def add_transaction(date, category, amount):
     global df
-    df = pandas.concat([df, 
-                        pandas.DataFrame([{'Date': date, 
-                                           'Category': category, 
+    df = pandas.concat([df,
+                        pandas.DataFrame([{'Date': date,
+                                           'Category': category,
                                            'Amount': float(amount)}])], 
-                       ignore_index=True)
+                        ignore_index=True)
+
 
 # Generate report function
 def generate_report():
@@ -32,7 +34,8 @@ def generate_report():
     plot.title('Expenses by Category')
     plot.ylabel('')
     plot.show()
-    
+
+
 # GUI Transaction Handling
 def handle_add_transaction():
     try:
