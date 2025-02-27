@@ -41,19 +41,19 @@ def handle_add_transaction():
     except ValueError:
         messagebox.showerror("Input Error", "Amount must be a number.")
 
-# GUI
-entries = {}
-app = tk.Tk()
-app.title("Expense Pal")
-for label, entry in [("Date (YYYY-MM-DD):", 'date_entry'), ("Category:", 'category_entry'), ("Amount:", 'amount_entry')]:
-    tk.Label(app, text=label).pack()
-    entries[entry] = tk.Entry(app)
-    entries[entry].pack()
-    
-tk.Button(app, text="Add Transaction", command=handle_add_transaction).pack()
-tk.Button(app, text="Generate Report", command=generate_report).pack()
 
 # Run the script. This allows unit testing by wrapping the Tkinter main loop
 # This change allows testing of file import functions without triggering the GUI
 if __name__ == "__main__":
+    app = tk.Tk()
+    # GUI
+    entries = {}
+    app.title("Expense Pal")
+    for label, entry in [("Date (YYYY-MM-DD):", 'date_entry'), ("Category:", 'category_entry'), ("Amount:", 'amount_entry')]:
+        tk.Label(app, text=label).pack()
+        entries[entry] = tk.Entry(app)
+        entries[entry].pack()
+    tk.Button(app, text="Add Transaction", command=handle_add_transaction).pack()
+    tk.Button(app, text="Generate Report", command=generate_report).pack()
+    
     app.mainloop()
