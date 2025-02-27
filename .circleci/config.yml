@@ -11,7 +11,7 @@ jobs:
           command: pip install flake8
       - run:
           name: Run Flake8 Linting
-          command: flake8 expense_pal.py --max-line-length=100 -- statistics
+          command: flake8 expense_pal.py --max-line-length=100 --statistics
 
   expense-pal:
     docker:
