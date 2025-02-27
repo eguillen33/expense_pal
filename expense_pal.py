@@ -13,8 +13,7 @@ def add_transaction(date, category, amount):
     df = pandas.concat([df,
                         pandas.DataFrame([{'Date': date,
                                            'Category': category,
-                                           'Amount': float(amount)}])], 
-                        ignore_index=True)
+                                           'Amount': float(amount)}])], ignore_index=True)
 
 
 # Generate report function
