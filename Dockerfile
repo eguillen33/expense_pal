@@ -4,8 +4,8 @@ WORKDIR /app
 
 COPY . .
 
-RUN --no-cache-dir -r requirements.txt
+RUN pip3 install --no-cache-dir -r requirements.txt
 
 EXPOSE 5000
 
-CMD ["Python", "expense_pal.py"]
+CMD ["Python3", "expense_pal.py"]

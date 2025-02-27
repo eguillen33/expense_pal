@@ -37,7 +37,7 @@ jobs:
           name: "Run unit tests"
           command: python3 -m unittest discover -s tests
 
-  build-and-push:
+  build-and-push-docker:
     executor: docker-executor
     steps:
       - checkout
@@ -64,6 +64,6 @@ workflows:
       - expense-pal:
           requires:
             - lint
-      - build-and-push:
+      - build-and-push-docker:
           requires:
             - expense-pal
