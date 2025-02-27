@@ -21,7 +21,11 @@ def generate_report():
         return messagebox.showinfo("No Data", "No transactions available.")
     total_income = df[df['Amount'] > 0]['Amount'].sum()
     total_expenses = df[df['Amount'] < 0]['Amount'].sum()
-    summary = f"Total Income: ${abs(total_income)}\nTotal Expenses: ${abs(total_expenses)}\nBalance: ${total_income - total_expenses}"
+    summary = (
+        f"Total Income: ${abs(total_income)}\n"
+        f"Total Expenses: ${abs(total_expenses)}\n"
+        f"Balance: ${total_income - total_expenses}"
+    )
     messagebox.showinfo("Summary Report", summary)
     # Create pie chart for expenses based on category
     df[df['Amount'] < 0].groupby('Category')['Amount'].sum().abs().plot.pie(autopct='%1.1f%%')
@@ -33,8 +37,8 @@ def generate_report():
 def handle_add_transaction():
     try:
         add_transaction(
-            entries['date_entry'].get(), 
-            entries['category_entry'].get(), 
+            entries['date_entry'].get(),
+            entries['category_entry'].get(),
             float(entries['amount_entry'].get())
         )
         messagebox.showinfo("Success", "Transaction added.")
@@ -49,7 +53,9 @@ if __name__ == "__main__":
     # GUI
     entries = {}
     app.title("Expense Pal")
-    for label, entry in [("Date (YYYY-MM-DD):", 'date_entry'), ("Category:", 'category_entry'), ("Amount:", 'amount_entry')]:
+    for label, entry in [("Date (YYYY-MM-DD):", 'date_entry'),
+                         ("Category:", 'category_entry'),
+                         ("Amount:", 'amount_entry')]:
         tk.Label(app, text=label).pack()
         entries[entry] = tk.Entry(app)
         entries[entry].pack()
@@ -57,3 +63,4 @@ if __name__ == "__main__":
     tk.Button(app, text="Generate Report", command=generate_report).pack()
     
     app.mainloop()
+    
