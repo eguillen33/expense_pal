@@ -1,6 +1,18 @@
 version: 2.1
 
 jobs:
+  lint:
+    docker:
+      - image: python:3.12
+    steps:
+      - checkout
+      - run:
+          name: Install Dependencies
+          command: pip install flake8
+      - run:
+          name: Run Flake8 Linting
+          command: flake8 expense_pal.py --max-line-length=100 -- statistics
+
   expense-pal:
     docker:
       - image: cimg/base:current
@@ -27,3 +39,5 @@ workflows:
     # Inside the workflow, define the jobs to run 
     jobs:
       - expense-pal
+          requires:
+            - lint
