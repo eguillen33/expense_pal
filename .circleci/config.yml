@@ -61,25 +61,25 @@ jobs:
     steps:
       - checkout
       - run:
-        name: Install Curl and jq
-        command: |
-          sudo apt-get update
-          sudo apt-get install -y curl jq
+          name: Install Curl and jq
+          command: |
+            sudo apt-get update
+            sudo apt-get install -y curl jq
       - run:
-        name: Create GitHub Release
-        command: |
-          VERSION="v$(date +'%Y%m%d%H%M%S')"  # Use timestamp as version
-          git tag -a $VERSION -m "Release $VERSION"
-          git push origin $VERSION
-          curl -X POST -H "Authorization: token $GITHUB_TOKEN" \
-          -d '{
-              "tag_name": "'"$VERSION"'",
-              "target_commitish": "main", 
-              "name": "'"$VERSION"'",
-              "body": "Release of version '"$VERSION"'",
-              "draft": false,
-              "prerelease": false
-          }' https://api.github.com/repos/eguillen33/expense_pal/releases
+          name: Create GitHub Release
+          command: |
+            VERSION="v$(date +'%Y%m%d%H%M%S')"  # Use timestamp as version
+            git tag -a $VERSION -m "Release $VERSION"
+            git push origin $VERSION
+            curl -X POST -H "Authorization: token $GITHUB_TOKEN" \
+            -d '{
+                "tag_name": "'"$VERSION"'",
+                "target_commitish": "main", 
+                "name": "'"$VERSION"'",
+                "body": "Release of version '"$VERSION"'",
+                "draft": false,
+                "prerelease": false
+            }' https://api.github.com/repos/eguillen33/expense_pal/releases
 
 # Orchestrate jobs using workflows
 workflows:
