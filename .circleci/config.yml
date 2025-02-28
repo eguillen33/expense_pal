@@ -73,7 +73,7 @@ jobs:
       - run:
           name: Set up GitHub Authentication using Token
           command: |
-            git config --global url."https://$GITHUB_TOKEN@github.com/".insteadOf "https://github.com/"
+            git remote set-url origin https://$GITHUB_TOKEN@github.com/eguillen33/expense_pal.git
       - run:
           name: Create GitHub Release
           command: |
