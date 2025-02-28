@@ -66,10 +66,10 @@ jobs:
             sudo apt-get update
             sudo apt-get install -y curl jq
       - run:
-        name: Configure Git user identity
-        command: |
-          git config --global user.email "id4eguillen@gmail.com"
-          git config --global user.name "eguillen33"
+          name: Configure Git user identity
+          command: |
+            git config --global user.email "id4eguillen@gmail.com"
+            git config --global user.name "eguillen33"
       - run:
           name: Create GitHub Release
           command: |
