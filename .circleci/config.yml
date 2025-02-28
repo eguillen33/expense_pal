@@ -55,6 +55,32 @@ jobs:
           command: |
             docker push edguillen/expense-pal:latest
 
+  create-github-release:
+    docker: 
+      - image: cimg/python:3.12
+    steps:
+      - checkout
+      - run:
+        name: Install Curl and jq
+        command: |
+          sudo apt-get update
+          sudo apt-get install -y curl jq
+      - run:
+        name: Create GitHub Release
+        command: |
+          VERSION="v$(date +'%Y%m%d%H%M%S')"  # Use timestamp as version
+          git tag -a $VERSION -m "Release $VERSION"
+          git push origin $VERSION
+          curl -X POST -H "Authorization: token $GITHUB_TOKEN" \
+          -d '{
+              "tag_name": "'"$VERSION"'",
+              "target_commitish": "main", 
+              "name": "'"$VERSION"'",
+              "body": "Release of version '"$VERSION"'",
+              "draft": false,
+              "prerelease": false
+          }' https://api.github.com/repos/<your-username>/<your-repository>/releases
+
 # Orchestrate jobs using workflows
 workflows:
   expense-pal-workflow: # Name of the workflow
@@ -67,3 +93,6 @@ workflows:
       - build-and-push-docker:
           requires:
             - expense-pal
+      - create-github-release:
+          requires:
+            - build-and-push-docker
