@@ -71,6 +71,7 @@ jobs:
             VERSION="v$(date +'%Y%m%d%H%M%S')"  # Use timestamp as version
             git tag -a $VERSION -m "Release $VERSION"
             git push origin $VERSION
+            
             curl -X POST -H "Authorization: token $GITHUB_TOKEN" \
             -d '{
                 "tag_name": "'"$VERSION"'",
