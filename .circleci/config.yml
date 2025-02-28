@@ -71,6 +71,10 @@ jobs:
             git config --global user.email "id4eguillen@gmail.com"
             git config --global user.name "eguillen33"
       - run:
+          name: Set up GitHub Authentication using Token
+          command: |
+            git config --global url."https://$GITHUB_TOKEN@github.com/".insteadOf "https://github.com/"
+      - run:
           name: Create GitHub Release
           command: |
             VERSION="v$(date +'%Y%m%d%H%M%S')"  # Use timestamp as version
