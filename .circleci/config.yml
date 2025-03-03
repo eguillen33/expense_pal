@@ -73,13 +73,27 @@ jobs:
       - run:
           name: Set up GitHub Authentication using Token
           command: |
-            git remote set-url origin https://$GITHUB_TOKEN@github.com/eguillen33/expense_pal.git
+            git remote set-url origin https://$GITHUB_TOKEN@github.com/eguillen33/expense_pal .git
+      - run:
+          name: Read and Increment Version
+          command: |
+            current_version=$(cat VERSION)
+            echo "Current Version: $current_version"
+
+            IFS='.' read -r -a version_parts <<< "$current_version"
+            patch_version=${version_parts[2]}
+            patch_version=$((patch_version + 1))
+
+            new_version="v${version_parts[0]}.${version_parts[1]}.$patch_version"
+            echo "New Version: $new_version"
+
+            echo "$new_version" > VERSION
+            git tag -a $new_version -m "Release $new_version"
+            git push origin $new_version
       - run:
           name: Create GitHub Release
           command: |
-            VERSION="v$(date +'%Y%m%d%H%M%S')"  # Use timestamp as version
-            git tag -a $VERSION -m "Release $VERSION"
-            git push origin $VERSION
+            VERSION=$(cat VERSION)
 
             curl -X POST -H "Authorization: token $GITHUB_TOKEN" \
             -d '{
