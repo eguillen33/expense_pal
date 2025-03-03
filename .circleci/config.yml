@@ -80,14 +80,16 @@ jobs:
             current_version=$(cat VERSION)
             echo "Current Version: $current_version"
 
-            IFS='.' read -r -a version_parts <<< "$current_version"
-            patch_version=${version_parts[2]}
+            version_parts=$(echo $current_version | tr '.' ' ')  # Replace dots with spaces
+            set -- $version_parts  # This splits the version into parts based on space
+            patch_version=$3
             patch_version=$((patch_version + 1))
 
-            new_version="v${version_parts[0]}.${version_parts[1]}.$patch_version"
+            new_version="v$1.$2.$patch_version"
             echo "New Version: $new_version"
 
             echo "$new_version" > VERSION
+            
             git tag -a $new_version -m "Release $new_version"
             git push origin $new_version
       - run:
