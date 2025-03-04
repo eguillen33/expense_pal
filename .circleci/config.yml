@@ -85,11 +85,11 @@ jobs:
             patch_version=$3
             patch_version=$((patch_version + 1))
 
-            new_version="v$1.$2.$patch_version"
+            new_version="$1.$2.$patch_version"
             echo "New Version: $new_version"
 
             echo "$new_version" > VERSION
-            
+
             git tag -a $new_version -m "Release $new_version"
             git push origin $new_version
       - run:
