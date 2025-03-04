@@ -89,9 +89,12 @@ jobs:
             echo "New Version: $new_version"
 
             echo "$new_version" > VERSION
+            git add VERSION
+            git commit -m "Incrementing version to $new_version"
 
             git tag -a $new_version -m "Release $new_version"
             git push origin $new_version
+            git push origin main
       - run:
           name: Create GitHub Release
           command: |
