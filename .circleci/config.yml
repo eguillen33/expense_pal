@@ -75,25 +75,19 @@ jobs:
           command: |
             git remote set-url origin https://$GITHUB_TOKEN@github.com/eguillen33/expense_pal .git
       - run:
-          name: Read and Increment Version
+          name: Generate Version Based on Date and Time
           command: |
-            current_version=$(cat VERSION)
-            echo "Current Version: $current_version"
-
-            version_parts=$(echo $current_version | tr '.' ' ')  # Replace dots with spaces
-            set -- $version_parts  # This splits the version into parts based on space
-            patch_version=$3
-            patch_version=$((patch_version + 1))
-
-            new_version="$1.$2.$patch_version"
+            new_version="v$(date +'%Y%m%d%H%M%S')"
             echo "New Version: $new_version"
 
             git tag -a $new_version -m "Release $new_version"
             git push origin $new_version
+            git push origin main
       - run:
-          name: Create GitHub Release
-          command: |
-            VERSION=$(cat VERSION)
+        name: Create GitHub Release
+        command: |
+            VERSION="v$(date +'%Y%m%d%H%M%S')"
+            echo "Using version: $VERSION"
 
             curl -X POST -H "Authorization: token $GITHUB_TOKEN" \
             -d '{
